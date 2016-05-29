@@ -16,10 +16,6 @@ def execute_command(command):
     output = process.communicate()
     return output[0].decode()
 
-def find_applications():
-    a = execute_command('ps aux | grep -i /Applications')
-    print(a[0])
-
 def search_and_kill_processes(name):
     ''' Returns the command to search and force kill apps by name '''
     return 'ps aux | grep -i ' + name + ' | awk {\'print $2\'} | xargs kill -9'
@@ -30,10 +26,9 @@ APPS_SEARCH_AND_FORCE_KILL = ['chrome', 'firefox', 'burp', 'atom', 'sublime', 'i
                               'vlc'
                              ]
 
-find_applications()
 ## Always do this last
-# APPS_SEARCH_AND_FORCE_KILL.append('terminal')
-#
-# for app in APPS_SEARCH_AND_FORCE_KILL:
-#     kill_command = search_and_kill_processes(app)
-#     execute_command(kill_command)
+APPS_SEARCH_AND_FORCE_KILL.append('terminal')
+
+for app in APPS_SEARCH_AND_FORCE_KILL:
+    kill_command = search_and_kill_processes(app)
+    execute_command(kill_command)
