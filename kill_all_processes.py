@@ -20,11 +20,18 @@ def search_and_kill_processes(name):
     ''' Returns the command to search and force kill apps by name '''
     return 'ps aux | grep -i ' + name + ' | awk {\'print $2\'} | xargs kill -9'
 
-APPS_SEARCH_AND_FORCE_KILL = ['chrome', 'firefox', 'burp', 'atom', 'sublime', 'intellij',
+APPS_DONT_KILL = ['stickies']
+
+APPS_SEARCH_AND_FORCE_KILL = ['chrome', 'firefox', 'burp', 'sublime', 'intellij',
                               'cyberduck', 'mail', 'finder', 'pages', 'calendar',
                               'keynote', 'numbers', 'slack', 'skitch', 'sequel', 'textedit',
-                              'vlc'
+                              'vlc', 'excel', 'atom'
                              ]
+
+## Remove apps we don't want to kill from the kill list
+## Just incase it accidentally gets added there
+for good_app in APPS_DONT_KILL:
+    APPS_SEARCH_AND_FORCE_KILL.remove(good_app)
 
 ## Always do this last
 APPS_SEARCH_AND_FORCE_KILL.append('terminal')
