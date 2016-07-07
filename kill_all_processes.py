@@ -25,13 +25,16 @@ APPS_DONT_KILL = ['stickies']
 APPS_SEARCH_AND_FORCE_KILL = ['chrome', 'firefox', 'burp', 'sublime', 'intellij',
                               'cyberduck', 'mail', 'finder', 'pages', 'calendar',
                               'keynote', 'numbers', 'slack', 'skitch', 'sequel', 'textedit',
-                              'vlc', 'excel', 'atom'
+                              'vlc', 'excel', 'atom', 'skype', 'safari'
                              ]
 
 ## Remove apps we don't want to kill from the kill list
 ## Just incase it accidentally gets added there
 for good_app in APPS_DONT_KILL:
-    APPS_SEARCH_AND_FORCE_KILL.remove(good_app)
+    try:
+        APPS_SEARCH_AND_FORCE_KILL.remove(good_app)
+    except:
+        pass
 
 ## Always do this last
 APPS_SEARCH_AND_FORCE_KILL.append('terminal')
